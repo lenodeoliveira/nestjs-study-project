@@ -16,7 +16,7 @@ export class CreateCustomerUseCase {
       throw new ConflictException('Customer already exists!');
     }
 
-    await this.customerRepository.createCustomer(input);
-    return input;
+    const customer = await this.customerRepository.createCustomer(input);
+    return customer;
   }
 }

@@ -30,14 +30,15 @@ class CustomerRepository implements ICustomerRepository {
       name: data.name,
       email: data.email,
       phone: data.phone,
+      street: data.street,
       age: data.age,
       zipcode: data.zipcode,
       complement: complement,
     };
 
-    const res = this.customerRepository.create(data);
-    await this.customerRepository.save(customer);
-    return res;
+    this.customerRepository.create(data);
+    const customerCreated = await this.customerRepository.save(customer);
+    return customerCreated;
   }
 }
 
