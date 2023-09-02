@@ -3,7 +3,7 @@ import { Customer } from '../entities/customer.entity';
 import { ICustomerRepository } from '../interfaces/customers/customer.interface';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { CustomerDTO } from 'src/module/customer/dto/CustomerDTO';
+import { CustomerDTO } from 'src/module/customer/dto/customer.dto';
 
 @Injectable()
 class CustomerRepository implements ICustomerRepository {

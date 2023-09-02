@@ -18,7 +18,7 @@ class Complement {
   })
   @IsString()
   @Length(3)
-  borough: string;
+  readonly borough: string;
 
   @ApiProperty({
     type: Number,
@@ -27,7 +27,7 @@ class Complement {
   })
   @IsInt()
   @Min(1)
-  residential_number: number;
+  readonly residential_number: number;
 }
 
 export class CustomerDTO {
@@ -38,7 +38,7 @@ export class CustomerDTO {
   })
   @IsString()
   @Length(6)
-  name: string;
+  readonly name: string;
 
   @ApiProperty({
     type: String,
@@ -46,7 +46,7 @@ export class CustomerDTO {
     description: 'This is a required property',
   })
   @Matches(/^\S*\w+\@edu\.pucrs(\.\w{2,3})+$/)
-  email: string;
+  readonly email: string;
 
   @ApiProperty({
     type: String,
@@ -55,7 +55,7 @@ export class CustomerDTO {
   })
   @IsString()
   @Length(11)
-  phone: string;
+  readonly phone: string;
 
   @ApiProperty({
     type: String,
@@ -64,7 +64,7 @@ export class CustomerDTO {
   })
   @IsString()
   @Length(1)
-  street: string;
+  readonly street: string;
 
   @ApiProperty({
     type: String,
@@ -73,7 +73,7 @@ export class CustomerDTO {
   })
   @IsString()
   @Length(8)
-  zipcode: string;
+  readonly zipcode: string;
 
   @ApiPropertyOptional({
     type: Number,
@@ -82,11 +82,11 @@ export class CustomerDTO {
   })
   @IsInt()
   @IsOptional()
-  age?: number;
+  readonly age?: number;
 
   @ApiProperty({ type: () => Complement })
   @ValidateNested()
   @IsOptional()
   @Type(() => Complement)
-  complement?: Complement;
+  readonly complement?: Complement;
 }

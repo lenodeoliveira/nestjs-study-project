@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { CreateCustomerInPut, CustomerOutPut } from './customer.types';
 import { ICustomerRepository } from '../../infra/typeorm/interfaces/customers/customer.interface';
 
@@ -13,7 +13,7 @@ export class CreateCustomerUseCase {
       await this.customerRepository.findCustomerByEmail(input?.email);
 
     if (customerAlreadyExists) {
-      throw new BadRequestException('customer already exists!');
+      throw new ConflictException('Customer already exists!');
     }
 
     await this.customerRepository.createCustomer(input);
