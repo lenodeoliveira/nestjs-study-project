@@ -5,7 +5,7 @@ import { ICustomerRepository } from '../../infra/typeorm/interfaces/customers/cu
 @Injectable()
 export class CreateCustomerUseCase {
   constructor(
-    @Inject('CustomerRepositorytesteste')
+    @Inject('CustomerRepositoryDB')
     private readonly customerRepository: ICustomerRepository,
   ) {}
   public async exec(input: CreateCustomerInPut): Promise<CustomerOutPut> {

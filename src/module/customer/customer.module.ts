@@ -12,13 +12,13 @@ import { Complement } from './infra/typeorm/entities/complement.entity';
   providers: [
     CreateCustomerUseCase,
     {
-      provide: 'CustomerRepositorytesteste',
+      provide: 'CustomerRepositoryDB',
       useClass: CustomerRepository,
     },
   ],
   exports: [
     {
-      provide: 'CustomerRepositorytesteste',
+      provide: 'CustomerRepositoryDB',
       useClass: CustomerRepository,
     },
   ],

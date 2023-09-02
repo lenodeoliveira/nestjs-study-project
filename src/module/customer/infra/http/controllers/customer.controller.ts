@@ -10,7 +10,7 @@ export class CustomersController {
 
   @Post('/')
   @ApiProperty({
-    type: String,
+    type: CustomerDTO,
     required: true,
     description: 'add a customer',
   })

@@ -5,6 +5,8 @@ import {
   IsOptional,
   ValidateNested,
   Matches,
+  Min,
+  Length,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -15,6 +17,7 @@ class Complement {
     description: 'This is an optional property',
   })
   @IsString()
+  @Length(3)
   borough: string;
 
   @ApiProperty({
@@ -23,6 +26,7 @@ class Complement {
     description: 'This is an optional property',
   })
   @IsInt()
+  @Min(1)
   residential_number: number;
 }
 
@@ -33,6 +37,7 @@ export class CustomerDTO {
     description: 'This is a required property',
   })
   @IsString()
+  @Length(6)
   name: string;
 
   @ApiProperty({
@@ -49,6 +54,7 @@ export class CustomerDTO {
     description: 'This is a required property',
   })
   @IsString()
+  @Length(11)
   phone: string;
 
   @ApiProperty({
@@ -57,6 +63,7 @@ export class CustomerDTO {
     description: 'This is a required property',
   })
   @IsString()
+  @Length(1)
   street: string;
 
   @ApiProperty({
@@ -65,6 +72,7 @@ export class CustomerDTO {
     description: 'This is a required property',
   })
   @IsString()
+  @Length(8)
   zipcode: string;
 
   @ApiPropertyOptional({
