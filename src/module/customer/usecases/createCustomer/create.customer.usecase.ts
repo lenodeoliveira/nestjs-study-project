@@ -8,6 +8,7 @@ export class CreateCustomerUseCase {
     @Inject('CustomerRepositoryDB')
     private readonly customerRepository: ICustomerRepository,
   ) {}
+
   public async exec(input: CreateCustomerInPut): Promise<CustomerOutPut> {
     const customerAlreadyExists =
       await this.customerRepository.findCustomerByEmail(input?.email);
