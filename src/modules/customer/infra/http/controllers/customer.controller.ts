@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Query, UseFilters } from '@nestjs/common';
 import { ApiTags, ApiProperty, ApiResponse } from '@nestjs/swagger';
 import { CreateCustomerUseCase } from '../../../usecases/createCustomer/create.customer.usecase';
-import { CustomerDTO } from 'src/module/customer/dto/customer.dto';
+import { CustomerDTO } from 'src/modules/customer/dto/customer.dto';
 
 @ApiTags('Customers')
 @Controller('/customers')

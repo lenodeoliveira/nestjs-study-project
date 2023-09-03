@@ -1,4 +1,4 @@
-import { CustomerDTO } from 'src/module/customer/dto/customer.dto';
+import { CustomerDTO } from 'src/modules/customer/dto/customer.dto';
 import { Customer } from '../../entities/customer.entity';
 
 interface ICustomerRepository {

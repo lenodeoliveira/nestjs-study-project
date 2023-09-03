@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Query, UseFilters } from '@nestjs/common';
 import { ApiTags, ApiProperty, ApiResponse } from '@nestjs/swagger';
 import { ProductDTO } from '../../../dto/product.dto';
-import { CreateProductUseCase } from 'src/module/products/usecase/createProduct/create.product.usecase';
+import { CreateProductUseCase } from 'src/modules/products/usecase/createProduct/create.product.usecase';
 
 @ApiTags('Products')
 @Controller('/product')

@@ -16,7 +16,7 @@ export default {
           '..',
           '..',
           '..',
-          'module',
+          'modules',
           '**',
           'infra',
           'typeorm',
