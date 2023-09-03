@@ -3,6 +3,8 @@ type InputProduct = {
   image_url: string;
   available: boolean;
   quantity_in_stock: number;
+  purchase_price: number;
+  sale_price: number;
 };
 
 type OutPutProduct = InputProduct & {

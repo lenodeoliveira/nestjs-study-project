@@ -35,6 +35,22 @@ class ProductDTO {
   })
   @IsNumber()
   quantity_in_stock: number;
+
+  @ApiProperty({
+    type: Number,
+    example: 100,
+    description: 'purchase price',
+  })
+  @IsNumber()
+  purchase_price: number;
+
+  @ApiProperty({
+    type: Number,
+    example: 150,
+    description: 'sale price',
+  })
+  @IsNumber()
+  sale_price: number;
 }
 
 export { ProductDTO };

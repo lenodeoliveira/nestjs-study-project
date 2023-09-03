@@ -9,7 +9,7 @@ import {
 @Entity('product')
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number;
+  product_id: number;
 
   @Column()
   name_product: string;
@@ -22,6 +22,12 @@ export class Product {
 
   @Column()
   quantity_in_stock: number;
+
+  @Column()
+  purchase_price: number;
+
+  @Column()
+  sale_price: number;
 
   @CreateDateColumn()
   created_at: Date;
