@@ -1,12 +1,25 @@
-import { Body, Controller, Get, Post, Query, UseFilters } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseFilters,
+} from '@nestjs/common';
 import { ApiTags, ApiProperty, ApiResponse } from '@nestjs/swagger';
 import { CreateCustomerUseCase } from '../../../usecases/createCustomer/create.customer.usecase';
 import { CustomerDTO } from 'src/modules/customer/dto/customer.dto';
+import { Customer } from '../../typeorm/entities/customer.entity';
+import { FindCustomerUseCase } from 'src/modules/customer/usecases/findCustomer/find.customer.usecase';
 
 @ApiTags('Customers')
 @Controller('/customers')
 export class CustomersController {
-  constructor(private readonly createCustomerUseCase: CreateCustomerUseCase) {}
+  constructor(
+    private readonly createCustomerUseCase: CreateCustomerUseCase,
+    private readonly findCustomerUseCase: FindCustomerUseCase,
+  ) {}
 
   @Post('/')
   @ApiProperty({
@@ -25,5 +38,20 @@ export class CustomersController {
     @Body() createCustomerDto: CustomerDTO,
   ): Promise<CustomerDTO> {
     return this.createCustomerUseCase.exec(createCustomerDto);
+  }
+
+  @Get('/:id')
+  @ApiProperty({
+    type: Number,
+    required: true,
+    description: 'Find a customer',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Customer',
+    type: Customer,
+  })
+  public async findCustomer(@Param('id') id: number): Promise<Customer> {
+    return await this.findCustomerUseCase.exec(+id);
   }
 }

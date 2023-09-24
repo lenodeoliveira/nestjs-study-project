@@ -11,6 +11,14 @@ class CustomerRepository implements ICustomerRepository {
     @InjectRepository(Customer)
     private customerRepository: Repository<Customer>,
   ) {}
+  async findCustomerById(id: number): Promise<Customer> {
+    const customer = await this.customerRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
+    return customer;
+  }
   findCustomerByEmail(email: string): Promise<Customer> {
     const customer = this.customerRepository
       .createQueryBuilder('customer')

@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { IProductRepository } from '../interfaces/product.repository.interface';
 import { ProductDTO } from 'src/modules/products/dto/product.dto';
 import { Product } from '../entities/product.entity';
@@ -15,6 +15,13 @@ class ProductRepository implements IProductRepository {
     this.productRepository.create(data);
     const productCreated = await this.productRepository.save(product);
     return productCreated;
+  }
+
+  async findProductsByIds(ids: number[]): Promise<Product[]> {
+    const products = await this.productRepository.findBy({
+      product_id: In(ids),
+    });
+    return products;
   }
 }
 

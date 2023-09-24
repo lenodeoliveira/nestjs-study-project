@@ -1,28 +1,32 @@
 import { Body, Controller, Get, Post, Query, UseFilters } from '@nestjs/common';
 import { ApiTags, ApiProperty, ApiResponse } from '@nestjs/swagger';
 import { CustomerDTO } from 'src/modules/customer/dto/customer.dto';
+import { OrderDTO } from 'src/modules/orders/dto/orders.dto';
+import { CreateOrderUseCase } from 'src/modules/orders/usecase/createOrder/create.order.usecase';
+import { Orders } from '../../typeorm/entities/order.entity';
 
 @ApiTags('Orders')
 @Controller('/orders')
 export class OrdersController {
-  //constructor(private readonly createCustomerUseCase: CreateCustomerUseCase) {}
+  constructor(private readonly createOrderUseCase: CreateOrderUseCase) {}
 
   @Post('/')
   @ApiProperty({
     type: CustomerDTO,
     required: true,
-    description: 'add a customer',
+    description: 'add a order',
   })
   @ApiResponse({
     status: 200,
-    description: 'Customer created',
-    type: CustomerDTO,
+    description: 'Order created',
+    type: OrderDTO,
   })
   @ApiResponse({ status: 409, description: 'Bad Request' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   public async createCustomer(
-    @Body() createCustomerDto: CustomerDTO,
-  ): Promise<CustomerDTO> {
-    return Promise.resolve(null);
+    @Body() createOrderDto: OrderDTO,
+  ): Promise<Orders> {
+    const orderCreated = await this.createOrderUseCase.exec(createOrderDto);
+    return orderCreated;
   }
 }
