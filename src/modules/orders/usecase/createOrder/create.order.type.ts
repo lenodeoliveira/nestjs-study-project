@@ -10,9 +10,10 @@ type InputOrder = {
 };
 
 type Items = {
-  id_product: number;
-  id_items: number;
-  sale_price: number;
+  product_id: number;
+  order_id?: number;
 };
 
-export { InputOrder };
+type OutPutOrder = InputOrder;
+
+export { InputOrder, OutPutOrder };

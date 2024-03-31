@@ -8,7 +8,16 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  healthCheck(): string {
-    return this.appService.healthCheck();
+  async healthCheck(): Promise<{
+    status: string;
+    error: unknown;
+    dataBaseStatus: string;
+  }> {
+    const res = await this.appService.healthCheck();
+    return {
+      status: res.status,
+      dataBaseStatus: res?.dataBaseStatus,
+      error: res.error ?? null,
+    };
   }
 }

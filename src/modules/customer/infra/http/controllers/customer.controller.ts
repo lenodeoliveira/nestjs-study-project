@@ -6,19 +6,22 @@ import {
   Post,
   Query,
   UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags, ApiProperty, ApiResponse } from '@nestjs/swagger';
 import { CreateCustomerUseCase } from '../../../usecases/createCustomer/create.customer.usecase';
-import { CustomerDTO } from 'src/modules/customer/dto/customer.dto';
+import { CustomerDTO } from '../../../dto/customer.dto';
 import { Customer } from '../../typeorm/entities/customer.entity';
-import { FindCustomerUseCase } from 'src/modules/customer/usecases/findCustomer/find.customer.usecase';
-
+import { FindCustomerUseCase } from '../../../usecases/findCustomer/find.customer.usecase';
+import { FindAllCustomersUseCase } from '../../../usecases/findAllCustomers/find.all.customers.usecase';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 @ApiTags('Customers')
 @Controller('/customers')
 export class CustomersController {
   constructor(
     private readonly createCustomerUseCase: CreateCustomerUseCase,
     private readonly findCustomerUseCase: FindCustomerUseCase,
+    private readonly findAllCustomersUseCase: FindAllCustomersUseCase,
   ) {}
 
   @Post('/')
@@ -41,6 +44,7 @@ export class CustomersController {
   }
 
   @Get('/:id')
+  @UseInterceptors(CacheInterceptor)
   @ApiProperty({
     type: Number,
     required: true,
@@ -52,6 +56,20 @@ export class CustomersController {
     type: Customer,
   })
   public async findCustomer(@Param('id') id: number): Promise<Customer> {
-    return await this.findCustomerUseCase.exec(+id);
+    const customer = await this.findCustomerUseCase.exec(+id);
+    return customer;
+  }
+
+  @Get('/')
+  @UseInterceptors(CacheInterceptor)
+  @ApiResponse({
+    status: 200,
+    description: 'Customers',
+    type: Customer,
+  })
+  public async findAll(): Promise<Customer[]> {
+    const customers = await this.findAllCustomersUseCase.exec();
+    console.log('Dados retornando do banco de dados!!');
+    return customers;
   }
 }

@@ -1,3 +1,4 @@
+import { Orders } from 'src/modules/orders/intra/typeorm/entities/order.entity';
 import {
   Entity,
   Column,

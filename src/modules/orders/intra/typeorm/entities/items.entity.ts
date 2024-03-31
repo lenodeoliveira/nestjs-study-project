@@ -1,10 +1,10 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  OneToOne,
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
 import { Orders } from './order.entity';
 import { Product } from 'src/modules/products/infra/typeorm/entities/product.entity';
@@ -14,16 +14,12 @@ export class Items {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => Orders, {
-    cascade: true,
-  })
-  @JoinColumn()
+  @ManyToOne(() => Orders, (order) => order.id)
+  @JoinColumn({ name: 'order_id' })
   order: Orders;
 
-  @OneToOne(() => Product, {
-    cascade: true,
-  })
-  @JoinColumn()
+  @ManyToOne(() => Product, (product) => product.product_id)
+  @JoinColumn({ name: 'product_id' })
   product: Product;
 
   @CreateDateColumn()

@@ -3,7 +3,7 @@ import { ApiTags, ApiProperty, ApiResponse } from '@nestjs/swagger';
 import { CustomerDTO } from 'src/modules/customer/dto/customer.dto';
 import { OrderDTO } from 'src/modules/orders/dto/orders.dto';
 import { CreateOrderUseCase } from 'src/modules/orders/usecase/createOrder/create.order.usecase';
-import { Orders } from '../../typeorm/entities/order.entity';
+import { OutPutOrder } from 'src/modules/orders/usecase/createOrder/create.order.type';
 
 @ApiTags('Orders')
 @Controller('/orders')
@@ -25,7 +25,7 @@ export class OrdersController {
   @ApiResponse({ status: 500, description: 'Internal server error' })
   public async createCustomer(
     @Body() createOrderDto: OrderDTO,
-  ): Promise<Orders> {
+  ): Promise<OutPutOrder> {
     const orderCreated = await this.createOrderUseCase.exec(createOrderDto);
     return orderCreated;
   }

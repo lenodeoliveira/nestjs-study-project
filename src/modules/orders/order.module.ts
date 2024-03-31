@@ -7,8 +7,8 @@ import { OrdersController } from './intra/http/controllers/orders.controller';
 import { CreateOrderUseCase } from './usecase/createOrder/create.order.usecase';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Orders, Items]), CustomersModule],
-  controllers: [OrdersController],
-  providers: [CreateOrderUseCase],
+  // imports: [TypeOrmModule.forFeature([Orders, Items]), CustomersModule],
+  // controllers: [OrdersController],
+  // providers: [CreateOrderUseCase],
 })
 export class OrdersModule {}

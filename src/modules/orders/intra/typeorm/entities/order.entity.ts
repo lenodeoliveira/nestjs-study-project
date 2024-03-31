@@ -6,9 +6,12 @@ import {
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
-import { Items } from './items.entity';
 import { Customer } from 'src/modules/customer/infra/typeorm/entities/customer.entity';
+import { Product } from 'src/modules/products/infra/typeorm/entities/product.entity';
+import { Items } from './items.entity';
 
 @Entity('orders')
 export class Orders {
@@ -39,10 +42,9 @@ export class Orders {
   @JoinColumn()
   customer: Customer;
 
-  @OneToOne(() => Items, (items) => items.order, {
-    cascade: true,
-  })
-  items: Items;
+  @ManyToMany(() => Items)
+  @JoinTable()
+  items: Items[];
 
   @CreateDateColumn()
   created_at: Date;

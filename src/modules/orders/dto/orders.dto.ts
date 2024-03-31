@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, ValidateNested, IsNumber } from 'class-validator';
 import { Type } from 'class-transformer';
-
 class Items {
   @ApiProperty({
     type: Number,
@@ -9,7 +8,7 @@ class Items {
     description: 'This is a required property',
   })
   @IsNumber()
-  readonly id_product: number;
+  readonly product_id: number;
 
   @ApiProperty({
     type: Number,
@@ -17,15 +16,7 @@ class Items {
     description: 'This is a required property',
   })
   @IsNumber()
-  readonly id_items: number;
-
-  @ApiProperty({
-    type: Number,
-    example: 100,
-    description: 'This is a required property',
-  })
-  @IsNumber()
-  readonly sale_price: number;
+  readonly order_id: number;
 }
 
 export class OrderDTO {

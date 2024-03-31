@@ -11,6 +11,9 @@ class CustomerRepository implements ICustomerRepository {
     @InjectRepository(Customer)
     private customerRepository: Repository<Customer>,
   ) {}
+  findAll(): Promise<Customer[]> {
+    return this.customerRepository.find();
+  }
   async findCustomerById(id: number): Promise<Customer> {
     const customer = await this.customerRepository.findOne({
       where: {
